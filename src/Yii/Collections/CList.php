@@ -38,7 +38,7 @@ use Yii\Base\CComponent;
  * @package system.collections
  * @since 1.0
  */
-class CList extends CComponent implements IteratorAggregate,ArrayAccess,Countable
+class CList extends Yii\Base\CComponent implements \IteratorAggregate,\ArrayAccess,\Countable
 {
 	/**
 	 * @var array internal data storage
@@ -263,11 +263,11 @@ class CList extends CComponent implements IteratorAggregate,ArrayAccess,Countabl
 	 */
 	public function copyFrom($data)
 	{
-		if(is_array($data) || ($data instanceof Traversable))
+		if(is_array($data) || ($data instanceof \Traversable))
 		{
 			if($this->_c>0)
 				$this->clear();
-			if($data instanceof CList)
+			if($data instanceof Yii\Collections\CList)
 				$data=$data->_d;
 			foreach($data as $item)
 				$this->add($item);
@@ -284,9 +284,9 @@ class CList extends CComponent implements IteratorAggregate,ArrayAccess,Countabl
 	 */
 	public function mergeWith($data)
 	{
-		if(is_array($data) || ($data instanceof Traversable))
+		if(is_array($data) || ($data instanceof \Traversable))
 		{
-			if($data instanceof CList)
+			if($data instanceof Yii\Collection\CList)
 				$data=$data->_d;
 			foreach($data as $item)
 				$this->add($item);

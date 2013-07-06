@@ -19,7 +19,7 @@ namespace Yii\Collections;
  * @package system.collections
  * @since 1.0
  */
-class CListIterator implements Iterator
+class CListIterator implements \Iterator
 {
 	/**
 	 * @var array the data to be iterated through

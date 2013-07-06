@@ -262,7 +262,7 @@ class CComponent
                     return call_user_func_array(array($object,$name),$parameters);
             }
         }
-        if(class_exists('Closure', false) && $this->canGetProperty($name) && $this->$name instanceof Closure)
+        if(class_exists('Closure', false) && $this->canGetProperty($name) && $this->$name instanceof \Closure)
             return call_user_func_array($this->$name, $parameters);
         throw new Yii\Base\CException(strtr('{class} and its behaviors do not have a method or closure named "{name}".',
             array('{class}'=>get_class($this), '{name}'=>$name)));
