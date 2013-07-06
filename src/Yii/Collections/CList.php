@@ -38,7 +38,7 @@ use Yii\Base\CComponent;
  * @package system.collections
  * @since 1.0
  */
-class CList extends Yii\Base\CComponent implements \IteratorAggregate,\ArrayAccess,\Countable
+class CList extends \Yii\Base\CComponent implements \IteratorAggregate,\ArrayAccess,\Countable
 {
 	/**
 	 * @var array internal data storage
@@ -126,7 +126,7 @@ class CList extends Yii\Base\CComponent implements \IteratorAggregate,\ArrayAcce
 		elseif($index>=0 && $index<$this->_c) // in case the value is null
 			return $this->_d[$index];
 		else
-			throw new Yii\Base\CException(strtr('List index "{index}" is out of bound.',
+			throw new \Yii\Base\CException(strtr('List index "{index}" is out of bound.',
 				array('{index}'=>$index)));
 	}
 
@@ -161,11 +161,11 @@ class CList extends Yii\Base\CComponent implements \IteratorAggregate,\ArrayAcce
 				$this->_c++;
 			}
 			else
-				throw new Yii\Base\CException(strtr('List index "{index}" is out of bound.',
+				throw new \Yii\Base\CException(strtr('List index "{index}" is out of bound.',
 					array('{index}'=>$index)));
 		}
 		else
-			throw new Yii\Base\CException('The list is read only.');
+			throw new \Yii\Base\CException('The list is read only.');
 	}
 
 	/**
@@ -210,11 +210,11 @@ class CList extends Yii\Base\CComponent implements \IteratorAggregate,\ArrayAcce
 				}
 			}
 			else
-				throw new Yii\Base\CException(strtr('List index "{index}" is out of bound.',
+				throw new \Yii\Base\CException(strtr('List index "{index}" is out of bound.',
 					array('{index}'=>$index)));
 		}
 		else
-			throw new Yii\Base\CException('The list is read only.');
+			throw new \Yii\Base\CException('The list is read only.');
 	}
 
 	/**
@@ -267,13 +267,13 @@ class CList extends Yii\Base\CComponent implements \IteratorAggregate,\ArrayAcce
 		{
 			if($this->_c>0)
 				$this->clear();
-			if($data instanceof Yii\Collections\CList)
+			if($data instanceof \Yii\Collections\CList)
 				$data=$data->_d;
 			foreach($data as $item)
 				$this->add($item);
 		}
 		elseif($data!==null)
-			throw new Yii\Base\CException('List data must be an array or an object implementing Traversable.');
+			throw new \Yii\Base\CException('List data must be an array or an object implementing Traversable.');
 	}
 
 	/**
@@ -286,13 +286,13 @@ class CList extends Yii\Base\CComponent implements \IteratorAggregate,\ArrayAcce
 	{
 		if(is_array($data) || ($data instanceof \Traversable))
 		{
-			if($data instanceof Yii\Collection\CList)
+			if($data instanceof \Yii\Collection\CList)
 				$data=$data->_d;
 			foreach($data as $item)
 				$this->add($item);
 		}
 		elseif($data!==null)
-			throw new Yii\Base\CException('List data must be an array or an object implementing Traversable.');
+			throw new \Yii\Base\CException('List data must be an array or an object implementing Traversable.');
 	}
 
 	/**
