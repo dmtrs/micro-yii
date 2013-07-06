@@ -102,7 +102,7 @@ class CComponent
      * </pre>
      * @param string $name the property name or event name
      * @return mixed the property value, event handlers attached to the event, or the named behavior
-     * @throws CException if the property or event is not defined
+     * @throws Yii\Base\CException if the property or event is not defined
      * @see __set
      */
     public function __get($name)
@@ -128,7 +128,7 @@ class CComponent
                     return $object->$name;
             }
         }
-        throw new CException(Yii::t('yii','Property "{class}.{property}" is not defined.',
+        throw new Yii\Base\CException(strtr('Property "{class}.{property}" is not defined.',
             array('{class}'=>get_class($this), '{property}'=>$name)));
     }
 
@@ -143,7 +143,7 @@ class CComponent
      * @param string $name the property name or the event name
      * @param mixed $value the property value or callback
      * @return mixed
-     * @throws CException if the property/event is not defined or the property is read only.
+     * @throws Yii\Base\CException if the property/event is not defined or the property is read only.
      * @see __get
      */
     public function __set($name,$value)
@@ -168,10 +168,10 @@ class CComponent
             }
         }
         if(method_exists($this,'get'.$name))
-            throw new CException(Yii::t('yii','Property "{class}.{property}" is read only.',
+            throw new Yii\Base\CException(strtr('Property "{class}.{property}" is read only.',
                 array('{class}'=>get_class($this), '{property}'=>$name)));
         else
-            throw new CException(Yii::t('yii','Property "{class}.{property}" is not defined.',
+            throw new Yii\Base\CException(strtr('Property "{class}.{property}" is not defined.',
                 array('{class}'=>get_class($this), '{property}'=>$name)));
     }
 
@@ -210,7 +210,7 @@ class CComponent
      * Do not call this method. This is a PHP magic method that we override
      * to allow using unset() to set a component property to be null.
      * @param string $name the property name or the event name
-     * @throws CException if the property is read only.
+     * @throws Yii\Base\CException if the property is read only.
      * @return mixed
      */
     public function __unset($name)
@@ -239,7 +239,7 @@ class CComponent
             }
         }
         elseif(method_exists($this,'get'.$name))
-            throw new CException(Yii::t('yii','Property "{class}.{property}" is read only.',
+            throw new Yii\Base\CException(strtr('Property "{class}.{property}" is read only.',
                 array('{class}'=>get_class($this), '{property}'=>$name)));
     }
 
@@ -249,7 +249,7 @@ class CComponent
      * to implement the behavior feature.
      * @param string $name the method name
      * @param array $parameters method parameters
-     * @throws CException if current class and its behaviors do not have a method or closure with the given name
+     * @throws Yii\Base\CException if current class and its behaviors do not have a method or closure with the given name
      * @return mixed the method return value
      */
     public function __call($name,$parameters)
@@ -264,7 +264,7 @@ class CComponent
         }
         if(class_exists('Closure', false) && $this->canGetProperty($name) && $this->$name instanceof Closure)
             return call_user_func_array($this->$name, $parameters);
-        throw new CException(Yii::t('yii','{class} and its behaviors do not have a method or closure named "{name}".',
+        throw new Yii\Base\CException(strtr('{class} and its behaviors do not have a method or closure named "{name}".',
             array('{class}'=>get_class($this), '{name}'=>$name)));
     }
 
@@ -464,7 +464,7 @@ class CComponent
      * Returns the list of attached event handlers for an event.
      * @param string $name the event name
      * @return CList list of attached event handlers for the event
-     * @throws CException if the event is not defined
+     * @throws Yii\Base\CException if the event is not defined
      */
     public function getEventHandlers($name)
     {
@@ -476,7 +476,7 @@ class CComponent
             return $this->_e[$name];
         }
         else
-            throw new CException(Yii::t('yii','Event "{class}.{event}" is not defined.',
+            throw new Yii\Base\CException(strtr('Event "{class}.{event}" is not defined.',
                 array('{class}'=>get_class($this), '{event}'=>$name)));
     }
 
@@ -509,7 +509,7 @@ class CComponent
      *
      * @param string $name the event name
      * @param callback $handler the event handler
-     * @throws CException if the event is not defined
+     * @throws Yii\Base\CException if the event is not defined
      * @see detachEventHandler
      */
     public function attachEventHandler($name,$handler)
@@ -539,7 +539,7 @@ class CComponent
      * all attached handlers for the event.
      * @param string $name the event name
      * @param CEvent $event the event parameter
-     * @throws CException if the event is undefined or an event handler is invalid.
+     * @throws Yii\Base\CException if the event is undefined or an event handler is invalid.
      */
     public function raiseEvent($name,$event)
     {
@@ -561,22 +561,22 @@ class CComponent
                         elseif(method_exists($object,$method))
                             $object->$method($event);
                         else
-                            throw new CException(Yii::t('yii','Event "{class}.{event}" is attached with an invalid handler "{handler}".',
+                            throw new Yii\Base\CException(strtr('Event "{class}.{event}" is attached with an invalid handler "{handler}".',
                                 array('{class}'=>get_class($this), '{event}'=>$name, '{handler}'=>$handler[1])));
                     }
                     else // PHP 5.3: anonymous function
                         call_user_func($handler,$event);
                 }
                 else
-                    throw new CException(Yii::t('yii','Event "{class}.{event}" is attached with an invalid handler "{handler}".',
+                    throw new Yii\Base\CException(strtr('Event "{class}.{event}" is attached with an invalid handler "{handler}".',
                         array('{class}'=>get_class($this), '{event}'=>$name, '{handler}'=>gettype($handler))));
                 // stop further handling if param.handled is set true
-                if(($event instanceof CEvent) && $event->handled)
+                if(($event instanceof Yii\Base\CEvent) && $event->handled)
                     return;
             }
         }
         elseif(YII_DEBUG && !$this->hasEvent($name))
-            throw new CException(Yii::t('yii','Event "{class}.{event}" is not defined.',
+            throw new Yii\Base\CException(strtr('Event "{class}.{event}" is not defined.',
                 array('{class}'=>get_class($this), '{event}'=>$name)));
     }
 
