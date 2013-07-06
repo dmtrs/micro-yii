@@ -292,7 +292,7 @@ class CList extends CComponent implements IteratorAggregate,ArrayAccess,Countabl
 				$this->add($item);
 		}
 		elseif($data!==null)
-			throw new Yii\Base\CException('List data must be an array or an object implementing Traversable.'));
+			throw new Yii\Base\CException('List data must be an array or an object implementing Traversable.');
 	}
 
 	/**
