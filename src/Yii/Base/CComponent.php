@@ -324,10 +324,8 @@ class CComponent
      * behavior with the same name, if it exists).
      * @return IBehavior the behavior object
      */
-    public function attachBehavior($name,$behavior)
+    public function attachBehavior($name, Yii\Base\IBehavior $behavior)
     {
-        if(!($behavior instanceof IBehavior))
-            $behavior=Yii::createComponent($behavior);
         $behavior->setEnabled(true);
         $behavior->attach($this);
         return $this->_m[$name]=$behavior;
