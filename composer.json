@@ -1,7 +1,7 @@
 {
     "name": "dmtrs/yii",
     "description": "yii components because we love them",
-    "license": "BSD",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "dmtrs",
@@ -16,6 +16,8 @@
         "psr-0": {
             "Yii": "src/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
     }
-
 }

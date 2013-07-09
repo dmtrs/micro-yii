@@ -105,7 +105,7 @@ class CBehavior extends CComponent implements IBehavior
 
 	private function _attachEventHandlers()
 	{
-		$class=new ReflectionClass($this);
+		$class=new \ReflectionClass($this);
 		foreach($this->events() as $event=>$handler)
 		{
 			if($class->getMethod($handler)->isPublic())
