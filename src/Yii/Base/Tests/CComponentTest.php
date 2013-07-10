@@ -1,60 +1,6 @@
 <?php
-//require_once dirname(__FILE__) . '/NewComponent.php';
-//require_once dirname(__FILE__) . '/NewBehavior.php';
-class NewComponent extends \Yii\Base\CComponent
-{
-	private $_object = null;
-	private $_text = 'default';
-	public $eventHandled = false;
-	public $behaviorCalled = false;
-
-	public function getText()
-	{
-		return $this->_text;
-	}
-
-	public function setText($value)
-	{
-		$this->_text=$value;
-	}
-
-	public function getObject()
-	{
-		if(!$this->_object)
-		{
-			$this->_object=new NewComponent;
-			$this->_object->_text='object text';
-		}
-		return $this->_object;
-	}
-
-	public function onMyEvent()
-	{
-		$this->raiseEvent('OnMyEvent',new \Yii\Base\CEvent($this));
-	}
-
-	public function myEventHandler($event)
-	{
-		$this->eventHandled=true;
-	}
-
-	public function exprEvaluator($p1,$comp) {
-		return "Hello $p1";
-	}
-
-	public function handler1() {}
-	public function handler2() {}
-	public function handler3() {}
-}
-
-class NewBehavior extends \Yii\Base\CBehavior
-{
-	public function test()
-	{
-		$this->owner->behaviorCalled=true;
-		return 2;
-	}
-}
+require_once dirname(__FILE__).'/NewComponent.php';
+require_once dirname(__FILE__).'/NewBehavior.php';
 
 function globalEventHandler($event)
 {
@@ -66,6 +12,7 @@ function globalEventHandler2($event)
 	$event->sender->eventHandled=true;
 	$event->handled=true;
 }
+
 
 class CComponentTest extends CTestCase
 {

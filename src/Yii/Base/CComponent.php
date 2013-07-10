@@ -573,7 +573,7 @@ class CComponent
                     return;
             }
         }
-        elseif(YII_DEBUG && !$this->hasEvent($name))
+        elseif(!$this->hasEvent($name))//YII_DEBUG check was here
             throw new \Yii\Base\CException(strtr('Event "{class}.{event}" is not defined.',
                 array('{class}'=>get_class($this), '{event}'=>$name)));
     }
