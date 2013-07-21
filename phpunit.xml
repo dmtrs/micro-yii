@@ -10,6 +10,7 @@
     <testsuites>
         <testsuite name="Yii base tests">
             <directory>./src/Yii/Base/Tests</directory>
+            <directory>./src/Yii/Collections/Tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>
